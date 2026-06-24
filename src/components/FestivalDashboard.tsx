@@ -14,10 +14,10 @@ import { motion, AnimatePresence } from "framer-motion";
 const FestivalMap = dynamic(() => import("./FestivalMap"), {
   ssr: false,
   loading: () => (
-    <div className="flex h-full w-full min-h-[400px] items-center justify-center bg-slate-950/40 rounded-2xl border border-slate-800 backdrop-blur-md">
+    <div className="flex h-full w-full min-h-[400px] items-center justify-center bg-slate-50/40 dark:bg-slate-950/40 rounded-2xl border border-slate-200 dark:border-slate-800 backdrop-blur-md transition-colors duration-300">
       <div className="flex flex-col items-center gap-3">
         <div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-500 border-t-transparent"></div>
-        <p className="text-sm text-slate-400">부산 축제 지도를 불러오는 중...</p>
+        <p className="text-sm text-text-secondary">부산 축제 지도를 불러오는 중...</p>
       </div>
     </div>
   ),
@@ -96,7 +96,7 @@ export default function FestivalDashboard({ initialFestivals }: FestivalDashboar
       // 1. Search Query
       const q = searchQuery.toLowerCase().trim();
       const matchesSearch =
-        !q ||
+         !q ||
         festival.MAIN_TITLE.toLowerCase().includes(q) ||
         festival.GUGUN_NM.toLowerCase().includes(q) ||
         (festival.TITLE && festival.TITLE.toLowerCase().includes(q)) ||
@@ -133,7 +133,7 @@ export default function FestivalDashboard({ initialFestivals }: FestivalDashboar
   };
 
   return (
-    <div className="flex flex-1 flex-col bg-[#070b14] text-slate-100 min-h-screen">
+    <div className="flex flex-1 flex-col bg-background text-foreground min-h-screen transition-colors duration-300">
       {/* Header */}
       <Header totalCount={initialFestivals.length} />
 
@@ -153,13 +153,13 @@ export default function FestivalDashboard({ initialFestivals }: FestivalDashboar
         />
 
         {/* Mobile Tab Control (Visible only on mobile/tablet) */}
-        <div className="flex rounded-xl bg-slate-900/60 p-1 border border-slate-800 md:hidden">
+        <div className="flex rounded-xl bg-slate-100 dark:bg-slate-900/60 p-1 border border-slate-200 dark:border-slate-800 md:hidden transition-colors duration-300">
           <button
             onClick={() => setActiveMobileTab("list")}
-            className={`flex flex-1 items-center justify-center gap-2 rounded-lg py-2.5 text-xs font-semibold tracking-wide transition-all ${
+            className={`flex flex-1 items-center justify-center gap-2 rounded-lg py-2.5 text-xs font-semibold tracking-wide transition-all cursor-pointer ${
               activeMobileTab === "list"
                 ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow"
-                : "text-slate-400 hover:text-white"
+                : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
             }`}
           >
             <ListIcon className="h-4 w-4" />
@@ -167,10 +167,10 @@ export default function FestivalDashboard({ initialFestivals }: FestivalDashboar
           </button>
           <button
             onClick={() => setActiveMobileTab("map")}
-            className={`flex flex-1 items-center justify-center gap-2 rounded-lg py-2.5 text-xs font-semibold tracking-wide transition-all ${
+            className={`flex flex-1 items-center justify-center gap-2 rounded-lg py-2.5 text-xs font-semibold tracking-wide transition-all cursor-pointer ${
               activeMobileTab === "map"
                 ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow"
-                : "text-slate-400 hover:text-white"
+                : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
             }`}
           >
             <MapIcon className="h-4 w-4" />
@@ -187,10 +187,10 @@ export default function FestivalDashboard({ initialFestivals }: FestivalDashboar
             }`}
           >
             {/* Search counts */}
-            <div className="flex items-center justify-between text-xs text-slate-400 font-medium">
+            <div className="flex items-center justify-between text-xs text-text-secondary font-medium transition-colors duration-300">
               <span>검색 결과 {filteredFestivals.length}건</span>
               {filteredFestivals.length === 0 && (
-                <span className="text-pink-400">조건에 부합하는 축제가 없습니다.</span>
+                <span className="text-pink-500">조건에 부합하는 축제가 없습니다.</span>
               )}
             </div>
 
@@ -209,15 +209,15 @@ export default function FestivalDashboard({ initialFestivals }: FestivalDashboar
               </AnimatePresence>
 
               {filteredFestivals.length === 0 && (
-                <div className="flex flex-col items-center justify-center py-20 text-center rounded-2xl border border-dashed border-slate-800 bg-slate-950/20 p-6">
-                  <HelpCircle className="h-10 w-10 text-slate-600 animate-bounce mb-3" />
-                  <h3 className="text-sm font-bold text-slate-300">검색 조건에 맞는 축제가 없습니다</h3>
-                  <p className="mt-1 text-xs text-slate-500 max-w-xs">
+                <div className="flex flex-col items-center justify-center py-20 text-center rounded-2xl border border-dashed border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/20 p-6 transition-colors duration-300">
+                  <HelpCircle className="h-10 w-10 text-slate-400 dark:text-slate-600 animate-bounce mb-3" />
+                  <h3 className="text-sm font-bold text-slate-700 dark:text-slate-300">검색 조건에 맞는 축제가 없습니다</h3>
+                  <p className="mt-1 text-xs text-slate-500 dark:text-slate-500 max-w-xs">
                     다른 키워드를 검색하거나 필터 옵션을 변경해보세요.
                   </p>
                   <button
                     onClick={handleResetFilters}
-                    className="mt-4 rounded-xl bg-slate-800 hover:bg-slate-700 px-4 py-2 text-xs font-bold text-slate-300 hover:text-white transition-all"
+                    className="mt-4 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 px-4 py-2 text-xs font-bold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer"
                   >
                     필터 초기화
                   </button>

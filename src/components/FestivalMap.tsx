@@ -52,7 +52,7 @@ export default function FestivalMap({
   };
 
   return (
-    <div className="relative h-full w-full overflow-hidden rounded-2xl border border-slate-800 bg-slate-950 shadow-xl">
+    <div className="relative h-full w-full overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-950 shadow-xl transition-colors duration-300">
       <MapContainer
         center={center}
         zoom={zoom}
@@ -81,10 +81,10 @@ export default function FestivalMap({
                 <div className="text-[10px] font-bold text-cyan-400 uppercase tracking-wider">
                   {festival.GUGUN_NM}
                 </div>
-                <h4 className="text-xs font-bold text-white leading-tight">
+                <h4 className="text-xs font-bold text-slate-900 dark:text-white leading-tight">
                   {festival.MAIN_TITLE}
                 </h4>
-                <div className="flex items-center gap-1 text-[10px] text-slate-400">
+                <div className="flex items-center gap-1 text-[10px] text-slate-650 dark:text-slate-400">
                   <Calendar className="h-3 w-3 text-blue-500" />
                   <span>
                     {festival.USAGE_DAY_WEEK_AND_TIME?.split("~")[0] || festival.USAGE_DAY || "일정 미정"}
@@ -92,7 +92,7 @@ export default function FestivalMap({
                 </div>
                 <button
                   onClick={() => onMarkerClick(festival)}
-                  className="mt-1 flex w-full items-center justify-center gap-1 rounded bg-blue-600/80 hover:bg-blue-600 py-1 text-[9px] font-bold text-white transition-colors"
+                  className="mt-1 flex w-full items-center justify-center gap-1 rounded bg-blue-650 hover:bg-blue-600 py-1 text-[9px] font-bold text-white transition-colors cursor-pointer"
                 >
                   <MapPin className="h-2.5 w-2.5" />
                   상세정보 보기
