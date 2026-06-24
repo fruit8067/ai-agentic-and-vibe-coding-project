@@ -1,8 +1,10 @@
 import { FestivalItem, FestivalResponse } from "@/types/festival";
 import { MOCK_FESTIVALS } from "./mockData";
 
-const API_KEY = "kVkC33x7gWwAwp4YarfhVlH%2BBRkORtsCcDxpVtDqj5k6LZUNfn%2FWV4MtMXxJc2CJW8C%2FclVUTPNnEJQHh8e57w%3D%3D";
-const API_URL = `https://apis.data.go.kr/6260000/FestivalService/getFestivalKr?serviceKey=${API_KEY}&pageNo=1&numOfRows=100&resultType=json`;
+const API_KEY = process.env.BUSAN_FESTIVAL_API_KEY;
+const API_BASE_URL = process.env.BUSAN_FESTIVAL_API_BASE_URL ?? "https://apis.data.go.kr/6260000/FestivalService/getFestivalKr";
+const API_URL = `${API_BASE_URL}?serviceKey=${API_KEY}&pageNo=1&numOfRows=100&resultType=json`;
+
 
 // Clean main title by removing language suffix like "(한,영, 중간,중번,일)"
 export function cleanTitle(title: string): string {
